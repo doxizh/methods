@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+</head>
+<style>
+    @keyframes container-rotate {
+        100% {
+            -webkit-transform: rotate(1turn);
+            transform: rotate(1turn);
+        }
+    }
+    
+    @keyframes fill-unfill-rotate {
+        12.5% {
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+        }
+        25% {
+            -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+        37.5% {
+            -webkit-transform: rotate(405deg);
+            transform: rotate(405deg);
+        }
+        50% {
+            -webkit-transform: rotate(540deg);
+            transform: rotate(540deg);
+        }
+        62.5% {
+            -webkit-transform: rotate(675deg);
+            transform: rotate(675deg);
+        }
+        75% {
+            -webkit-transform: rotate(810deg);
+            transform: rotate(810deg);
+        }
+        87.5% {
+            -webkit-transform: rotate(945deg);
+            transform: rotate(945deg);
+        }
+        100% {
+            -webkit-transform: rotate(3turn);
+            transform: rotate(3turn);
+        }
+    }
+    
+    @keyframes left-spin {
+        0% {
+            -webkit-transform: rotate(130deg);
+            transform: rotate(130deg);
+        }
+        50% {
+            -webkit-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+        }
+        100% {
+            -webkit-transform: rotate(130deg);
+            transform: rotate(130deg);
+        }
+    }
+    
+    @keyframes right-spin {
+        0% {
+            -webkit-transform: rotate(-130deg);
+            transform: rotate(-130deg);
+        }
+        50% {
+            -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+        }
+        100% {
+            -webkit-transform: rotate(-130deg);
+            transform: rotate(-130deg);
+        }
+    }
+    
+    .mu-loading-wrap {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 9999999999;
+        max-width: 750px;
+        top: 50%;
+        left: 50%;
+        font-size: 0;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .mu-circular-progress {
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        background: transparent;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 48px;
+        height: 48px;
+    }
+    
+    .mu-circle-wrapper {
+        display: inline-block;
+        position: relative;
+        width: 48px;
+        height: 48px;
+        -webkit-animation: container-rotate 1568ms linear infinite;
+        animation: container-rotate 1568ms linear infinite;
+    }
+    
+    .mu-circle-spinner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        border-color: #569add;
+        background-color: transparent;
+        -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(.4, 0, .2, 1) infinite both;
+        animation: fill-unfill-rotate 5332ms cubic-bezier(.4, 0, .2, 1) infinite both;
+    }
+    
+    .mu-circle-clipper {
+        display: inline-block;
+        position: relative;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        border-color: inherit;
+    }
+    
+    .mu-circle-clipper.left {
+        float: left;
+    }
+    
+    .mu-circle-clipper.right {
+        float: right;
+    }
+    
+    .mu-circle-gap-patch {
+        position: absolute;
+        top: 0;
+        left: 45%;
+        width: 10%;
+        height: 100%;
+        overflow: hidden;
+        border-color: inherit;
+    }
+    
+    .mu-circle {
+        width: 200%;
+        height: 100%;
+        border-width: 2px;
+        border-style: solid;
+        border-color: inherit;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: none;
+        animation: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    .mu-circle-clipper.left .mu-circle {
+        left: 0;
+        border-right-color: transparent;
+        -webkit-transform: rotate(129deg);
+        -ms-transform: rotate(129deg);
+        transform: rotate(129deg);
+        -webkit-animation: left-spin 1333ms cubic-bezier(.4, 0, .2, 1) infinite both;
+        animation: left-spin 1333ms cubic-bezier(.4, 0, .2, 1) infinite both;
+    }
+    
+    .mu-circle-clipper.right .mu-circle {
+        left: -100%;
+        border-left-color: transparent;
+        -webkit-transform: rotate(-129deg);
+        -ms-transform: rotate(-129deg);
+        transform: rotate(-129deg);
+        -webkit-animation: right-spin 1333ms cubic-bezier(.4, 0, .2, 1) infinite both;
+        animation: right-spin 1333ms cubic-bezier(.4, 0, .2, 1) infinite both;
+    }
+
+    .mu-circle-gap-patch .mu-circle {
+        width: 1000%;
+        left: -450%;
+    }
+</style>
+<body>
+<div class="mu-loading-wrap">
+    <div class="mu-circular-progress">
+        <div class="mu-circle-wrapper">
+            <div class="mu-circle-spinner">
+                <div class="mu-circle-clipper left">
+                    <div class="mu-circle"></div>
+                </div>
+                <div class="mu-circle-gap-patch">
+                    <div class="mu-circle"></div>
+                </div>
+                <div class="mu-circle-clipper right">
+                    <div class="mu-circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
